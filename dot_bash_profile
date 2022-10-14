@@ -1,0 +1,16 @@
+# ~/.bash_profile: executed by bash for login shells.
+echo "(~/.bash_profile)"
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+if [ -d "$HOME/bin" ]; then
+    PATH=$PATH:$HOME/bin
+fi
+export PATH
+
+[ -s "/Users/mwilber/.jabba/jabba.sh" ] && source "/Users/mwilber/.jabba/jabba.sh"

@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/mwilber/projects/pht/alp/infrastructure'
+let g:netrw_dirhist_2='/Users/mwilber/.dotfiles/to_vet'
+let g:netrw_dirhist_1='/Users/mwilber/.dotfiles/be-env.symlink/pht'
+let g:netrw_dirhist_0='/Users/mwilber/projects/pht/4gl/common/prg/ins_ct.4gm'
+let g:netrw_dirhist_9='/Users/mwilber/projects/pht/redstone/app/views/replenishment_modifications'
+let g:netrw_dirhist_8='/Users/mwilber/.dotfiles/be-env.symlink/pht'
+let g:netrw_dirhist_7='/Users/mwilber/projects/pht/pht2/etc-template/prophet/tomcat/conf/Catalina'
+let g:netrw_dirhist_6='/Users/mwilber/projects/pht/pht2/etc-template'
+let g:netrw_dirhist_5='/Users/mwilber/projects/pht/prophet/etc-template/prophet'
+let g:netrw_dirhist_4='/Users/mwilber/projects/pht/analytics/gradle'

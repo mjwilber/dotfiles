@@ -1,0 +1,14 @@
+# Always color
+--color
+
+# Use less -r as my pager
+--pager=less -R
+
+--type-set
+freemarker=.ftl
+
+--type-set
+properties=.properties
+
+--type-set
+gradle=.gradle

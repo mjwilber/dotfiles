@@ -1,0 +1,104 @@
+# Conky, a system monitor, based on torsmo
+#
+color2 orange #title
+color1 FFFFFF #text
+color0 FFA500 #icon
+
+alignment top_left
+background no
+border_width 1
+cpu_avg_samples 2
+default_color 5382BA #white
+default_outline_color white
+default_shade_color 000000 #white
+double_buffer yes
+draw_borders yes
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+use_xft yes
+font ubuntu:size=8
+xftfont ubuntu:size=8
+xftalpha 0.5
+gap_x 15
+gap_y 80
+maximum_width 180
+minimum_size 180 800
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr yes
+extra_newline no
+own_window yes
+#own_window_class Conky
+own_window_colour 191919
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager
+#own_window_transparent yes
+own_window_type desktop
+# own_window_type override
+pad_percents 2
+stippled_borders 0
+temperature_unit fahrenheit
+update_interval 3.0
+uppercase no
+use_spacer left
+# use_spacer none
+show_graph_scale no
+show_graph_range no
+
+lua_load ~/.conky/format.lua
+
+#template0 (Heading) 1:name 2:hr height
+template0 ${color}${color2}\1» ${hr \2}${color}
+
+#template1 (process) 1:top/top_mem/top_io 2:process rank for #1
+template1 ${\1 name \2} $alignr ${\1 pid \2} ${\1 cpu \2} ${\1 mem \2} ${lua_parse format %3.0f ${\1 io_perc \2}}%
+
+
+TEXT
+${template0 SYSTEM 2}
+${time}${alignr}$nodename
+${alignc}$sysname $kernel on $machine
+${alignc}${pre_exec lsb_release -d | cut -f 2} (${pre_exec lsb_release -c | cut -f 2})
+${alignc}Uptime: ${uptime}
+#
+${template0 CPU 2}
+${freq}MHz${alignr}Temp: ${hwmon temp 1}°F
+CPU: ${cpu}%${alignr}Load: ${loadavg}
+${color3}${cpugraph 474747 E9E9E9}
+${cpugraph cpu0 20,45 474747 E9E9E9}${cpugraph cpu1 20,45 474747 E9E9E9}${cpugraph cpu2 20,45 474747 E9E9E9}${cpugraph cpu3 20,45 474747 E9E9E9}${color1}
+${template0 PROCESSES 2}
+NAME $alignr PID   CPU   MEM       IO
+${template0 cpu 1}
+${template1 top 1}
+${template1 top 2}
+${template1 top 3}
+${template1 top 4}
+${template0 memory 1}
+${template1 top_mem 1}
+${template1 top_mem 2}
+${template1 top_mem 3}
+${template0 io 1}
+${template1 top_io 1}
+${template1 top_io 2}
+#
+${template0 MEMORY 2}
+RAM   ${memperc}%  ${alignr}${mem} / ${memmax}
+${color3}${membar 4}${color1}
+#Swap: ${swapperc}% ${swap} ${swapbar 6}
+#
+${template0 HDD 2}
+Disk IO${alignr}${diskio}
+${color3}${diskiograph 474747 E9E9E9}${color1}
+Root: ${fs_used_perc /}% ${fs_free /} ${fs_bar 6 /}
+Home: ${fs_used_perc /homedata}% ${fs_free /homedata} ${fs_bar 6 /homedata}
+Data: ${fs_used_perc /data}% ${fs_free /data} ${fs_bar 6 /data}${color}
+#
+${template0 NETWORK\ (${addr\ eth0}) 2}
+Up:   ${upspeed eth0}/s ${alignr}Down: ${downspeed eth0}/s
+Total: ${totalup eth0} ${alignr}Total: ${totaldown eth0}
+${color3}${downspeedgraph eth0 25,88 474747 E9E9E9} ${alignr}${upspeedgraph eth0 25,88 474747 E9E9E9}${color1}
+Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768 61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}
+#
+${template0 LOGGING 2}
+${execi 30 tail -n3 /var/log/syslog | fold -w50}
